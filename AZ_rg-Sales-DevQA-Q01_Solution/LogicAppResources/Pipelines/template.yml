@@ -10,3 +10,4 @@ steps:
         resourceGroupName: 'd3rg1'
         location: 'East US'
         csmFile: 'AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/appLA_S3F/${{ p }}'
+
