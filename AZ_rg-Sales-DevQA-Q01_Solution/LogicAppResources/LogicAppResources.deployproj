@@ -23,8 +23,8 @@
   <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
   <!-- vertag<:>end -->
   <ItemGroup>
-    <None Include="appLA-S3F-REALSfdc2SdfDeleteAccountContact-ARM.json" />
-    <None Include="appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json" />
+    <None Include="appLA_S3F\appLA-S3F-REALSfdc2SdfDeleteAccountContact-ARM.json" />
+    <None Include="appLA_S3F\appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
@@ -32,6 +32,8 @@
     <Content Include="LogicApp.json" />
     <Content Include="LogicApp.parameters.json" />
     <None Include="LogicApp_deploy.ps1" />
+    <None Include="Pipelines\azure-pipelines.yml" />
+    <None Include="Pipelines\template.yml" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
