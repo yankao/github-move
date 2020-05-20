@@ -3,5 +3,10 @@ parameters:
 
 steps:
   - ${{ each p in parameters.param }}:
-    - script: 'echo ${{ p }}'
-
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Azure Deployment:Create Or Update Resource Group action on rg-Sales-DevQA-Q01'
+      inputs:
+        azureSubscription: 'SC_d3rg1'
+        resourceGroupName: 'd3rg1'
+        location: 'East US'
+        csmFile: 'AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/appLA_S3F/${{ p }}'
