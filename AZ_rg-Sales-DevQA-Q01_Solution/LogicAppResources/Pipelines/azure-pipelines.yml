@@ -1,5 +1,7 @@
 steps:
   - template : template.yml
     parameters:
-      param: ["appLA-S3F-REALSfdc2SdfDeleteAccountContact-ARM.json", "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json"]
+      param:
+        - "appLA-S3F-REALSfdc2SdfDeleteAccountContact-ARM.json"
+        - "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json"
       
