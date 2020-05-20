@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "logicAppName": {
-        "value": "appLA-Test-CICD-D01"
+        "value": "appla-test-cicd-d01"
     }
   }
 }
