@@ -1,523 +1,127 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "documentdb_accessKey": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "messagingQueueAPI": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "messagingQueueClientId": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "messagingQueueSecret": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "documentdb_Connection_Name": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "documentdb_Connection_DisplayName": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "documentdb_databaseAccount": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "salesforce_Connection_Name": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "salesforce_Connection_DisplayName": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "cosmosdb_Collection": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "salesforce_token:LoginUri": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "salesforce_salesforceApiVersion": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "env": {
-      "type": "string",
-      "defaultValue": "id"
-    },
-    "LogicAppLocation": {
-      "type": "string",
-      "minLength": 1,
-      "allowedValues": [
-        "[resourceGroup().location]",
-        "eastasia",
-        "southeastasia",
-        "centralus",
-        "eastus",
-        "eastus2",
-        "westus",
-        "northcentralus",
-        "southcentralus",
-        "northeurope",
-        "westeurope",
-        "japanwest",
-        "japaneast",
-        "brazilsouth",
-        "australiaeast",
-        "australiasoutheast",
-        "southindia",
-        "centralindia",
-        "westindia",
-        "canadacentral",
-        "canadaeast",
-        "uksouth",
-        "ukwest",
-        "westcentralus",
-        "westus2",
-        "koreacentral",
-        "koreasouth",
-        "francecentral",
-        "francesouth",
-        "southafricanorth",
-        "southafricawest"
-      ],
-      "defaultValue": "eastus"
-    },
-    "ParamCollection": {
-      "defaultValue": {},
-      "type": "object"
-    }
-  },
-  "variables": {},
-  "resources": [
-    {
-      "properties": {
-        "state": "Enabled",
-        "definition": {
-          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-          "actions": {
-            "Declare_AccountJSON": {
-              "type": "InitializeVariable",
-              "inputs": {
-                "variables": [
-                  {
-                    "name": "AccountJSON",
-                    "type": "String"
-                  }
-                ]
-              },
-              "runAfter": {
-                "Declare_MessagingQueueStatus": [
-                  "Succeeded",
-                  "Failed",
-                  "Skipped",
-                  "TimedOut"
-                ]
-              }
-            },
-            "Declare_MessagingQueueStatus": {
-              "type": "InitializeVariable",
-              "inputs": {
-                "variables": [
-                  {
-                    "name": "MessagingQueueStatus",
-                    "type": "String",
-                    "value": "Failed"
-                  }
-                ]
-              },
-              "runAfter": {
-                "Retrieve_DomainUserName_From_Id": [
-                  "Succeeded",
-                  "Failed",
-                  "Skipped",
-                  "TimedOut"
-                ]
-              }
-            },
-            "Declare_TTL_for_cosmos_logging": {
-              "type": "InitializeVariable",
-              "inputs": {
-                "variables": [
-                  {
-                    "name": "TTL",
-                    "type": "integer",
-                    "value": 2592000
-                  }
-                ]
-              },
-              "runAfter": {
-                "Declare_AccountJSON": [
-                  "Succeeded",
-                  "Failed",
-                  "Skipped",
-                  "TimedOut"
-                ]
-              }
-            },
-            "Retrieve_DomainUserName_From_Id": {
-              "runAfter": {},
-              "type": "ApiConnection",
-              "inputs": {
-                "host": {
-                  "connection": {
-                    "name": "@parameters('$connections')['salesforce']['connectionId']"
-                  }
-                },
-                "method": "get",
-                "path": "/v2/datasets/default/tables/@{encodeURIComponent(encodeURIComponent('User'))}/items/@{encodeURIComponent(encodeURIComponent(triggerBody()?['LastModifiedById']))}",
-                "queries": {
-                  "$select": "GUID__c,FederationIdentifier"
-                }
-              }
-            },
-            "Validate_required_fields_and_Invoke_messaging_queue_service": {
-              "type": "If",
-              "expression": {
-                "and": [
-                  {
-                    "not": {
-                      "equals": [
-                        "@triggerBody()?['GUID__c']",
-                        "@null"
-                      ]
-                    }
-                  },
-                  {
-                    "not": {
-                      "equals": [
-                        "@triggerBody()?['GUID__c']",
-                        "''"
-                      ]
-                    }
-                  },
-                  {
-                    "not": {
-                      "equals": [
-                        "@body('Retrieve_DomainUserName_From_Id')?['GUID__c']",
-                        "@null"
-                      ]
-                    }
-                  },
-                  {
-                    "not": {
-                      "equals": [
-                        "@body('Retrieve_DomainUserName_From_Id')?['GUID__c']",
-                        "''"
-                      ]
-                    }
-                  },
-                  {
-                    "not": {
-                      "equals": [
-                        "@body('Retrieve_DomainUserName_From_Id')?['FederationIdentifier']",
-                        "@null"
-                      ]
-                    }
-                  },
-                  {
-                    "not": {
-                      "equals": [
-                        "@body('Retrieve_DomainUserName_From_Id')?['FederationIdentifier']",
-                        "''"
-                      ]
-                    }
-                  }
-                ]
-              },
-              "actions": {
-                "Compose_JSON": {
-                  "type": "Compose",
-                  "inputs": "\"AccountInfo\": {\n        \"@AccountGUID\": \"@{trim(coalesce(triggerBody()?['GUID__c'],''))}\",\n        \"@AccountNumber\": \"@{triggerBody()?['AccountNumber']}\",\n        \"@DomainUserName\":\"@{concat('pmusa\\\\\\\\',replace(replace(coalesce(body('Retrieve_DomainUserName_From_Id')?['FederationIdentifier'],''),'''','\\'''),'pmusa\\',''))}\",\n        \"@SalesEmpGuid\":\"@{trim(coalesce(body('Retrieve_DomainUserName_From_Id')?['GUID__c'],''))}\",\n        \"@OwnershipType\": \"@{triggerBody()?['Ownership']}\",\n        \"@ActionType\": \"UpdateAccountProfileInfo\",\n        \"Profile\": {\n            \"@AccountName\": \"@{replace(replace(coalesce(triggerBody()?['Name'],''),'''','\\'''),'\"','\\\\\"')}\",\n            \"@AdvertisingName\": \"@{replace(replace(coalesce(triggerBody()?['Advertising_Name__c'],''),'''','\\'''),'\"','\\\\\"')}\",\n            \"@Phone\": \"@{triggerBody()?['Phone']}\",\n            \"@Contingency\":\"@{toLower(coalesce(string(triggerBody()?['Contingency__c']),'false'))}\",\n            \"@ContingencyReason\":\"@{replace(replace(coalesce(triggerBody()?['Contingency_Reason__c'],''),'''','\\'''),'\"','\\\\\"')}\",\n            \"@Seasonal\": \"@{toLower(coalesce(string(triggerBody()?['Seasonal__c']),'false'))}\",\n            \"@SeasonalOpenDate\": \"@{triggerBody()?['Seasonal_Open_Date__c']}\",\n            \"@SeasonalCloseDate\": \"@{triggerBody()?['Seasonal_Close_Date__c']}\",\n            \"@PhysicalAddress\":\"@{replace(replace(coalesce(triggerBody()?['BillingStreet'],''),'''','\\'''),'\"','\\\\\"')}\",\n            \"@PhysicalAddressCity\":\"@{replace(coalesce(triggerBody()?['BillingCity'],''),'''','\\''')}\",\n            \"@PhysicalAddressState\":\"@{replace(coalesce(triggerBody()?['BillingState'],''),'''','\\''')}\",\n            \"@PhysicalAddressZipCode\":\"@{replace(coalesce(triggerBody()?['BillingPostalCode'],''),'''','\\''')}\",\n            \"@DeliveryAddress\":\"@{replace(replace(coalesce(triggerBody()?['ShippingStreet'],''),'''','\\'''),'\"','\\\\\"')}\",\n            \"@DeliveryAddressCity\":\"@{replace(coalesce(triggerBody()?['ShippingCity'],''),'''','\\''')}\",\n            \"@DeliveryAddressState\":\"@{replace(coalesce(triggerBody()?['ShippingState'],''),'''','\\''')}\",\n            \"@DeliveryAddressZipCode\":\"@{replace(coalesce(triggerBody()?['ShippingPostalCode'],''),'''','\\''')}\",\n            \"@IsDeleted\": \"false\",\n            \"@UpdateUser\": \"@{concat('pmusa\\\\\\\\',replace(replace(coalesce(body('Retrieve_DomainUserName_From_Id')?['FederationIdentifier'],''),'''','\\'''),'pmusa\\',''))}\",\n            \"@UpdateDate\": \"@{triggerBody()?['LastModifiedDate']}\"\n        }\n    }",
-                  "runAfter": {}
-                },
-                "Insert_Log_JSON": {
-                  "runAfter": {
-                    "Set_Log_JSON": [
-                      "Succeeded"
-                    ]
-                  },
-                  "type": "ApiConnection",
-                  "inputs": {
-                    "body": "@variables('AccountJSON')",
-                    "headers": {
-                      "x-ms-documentdb-is-upsert": false,
-                      "x-ms-documentdb-raw-partitionkey": "\"@{formatDateTime(utcNow(),'yyyyMM')}\""
-                    },
-                    "host": {
-                      "connection": {
-                        "name": "@parameters('$connections')['documentdb']['connectionId']"
-                      }
-                    },
-                    "method": "post",
-                    "path": "/dbs/@{encodeURIComponent('SfdcSync')}/colls/@{encodeURIComponent(parameters('$Collections')['Cosmosdb_Collection'])}/docs"
-                  }
-                },
-                "Invoke_Messaging_Queue_API": {
-                  "type": "Http",
-                  "inputs": {
-                    "method": "POST",
-                    //"uri": "https://agdcqaapimgmt.azure-api.net/SSF/MessagingQueue/Post",
-                    "uri": "[parameters('messagingQueueAPI')]",
-                    "headers": {
-                      "Content-Type": "application/json"
-                    },
-                    "queries": {
-                      "actionType": "S3F_QueueMessage_UpdateAccountInfo"
-                    },
-                    "body": "@variables('AccountJSON')",
-                    "authentication": {
-                      "type": "ActiveDirectoryOAuth",
-                      "tenant": "535b2d87-664f-415a-b7fa-fd3f1086d450",
-                      "audience": "00000002-0000-0000-c000-000000000000",
-                      "clientId": "[parameters('messagingQueueClientId')]",
-                      "secret": "[parameters('messagingQueueSecret')]"
-                    }
-                  },
-                  "runAfter": {
-                    "Stringify_JSON": [
-                      "Succeeded",
-                      "Failed",
-                      "Skipped",
-                      "TimedOut"
-                    ]
-                  }
-                },
-                "Set_Log_JSON": {
-                  "type": "SetVariable",
-                  "inputs": {
-                    "name": "AccountJSON",
-                    "value": "{\n\"id\":\"@{guid()}\",\n\"partition\":\"@{formatDateTime(utcNow(),'yyyyMM')}\",\n\"logTimeUTC\":\"@{utcNow()}\",\n\"type\":\"InBound\",\n\"principal\":\"LogicApp\",\n\"operation\":\"@{parameters('$Collections')['LAname']}\",\n\"currentState\":\"@{variables('MessagingQueueStatus')}\",\n\"correlationId\":\"True Operation\",\n\"timeZone\":\"EST\",\n\"request\":\n{\"Account\":@{triggerBody()},\"User\":@{body('Retrieve_DomainUserName_From_Id')},\"MessagingQueueRequest\":@{replace(replace(concat('{',string(outputs('Compose_JSON')),'}'),'\\''',''''),'\\\\\"','\\\"')}},\n\"response\":{\"MessagingQueueResponse\":@{body('Invoke_Messaging_Queue_API')}},\n\"error\":\"\",\n\"ttl\":@{variables('TTL')}\n}"
-                  },
-                  "runAfter": {
-                    "Validate_messaging_queue_service_status": [
-                      "Succeeded",
-                      "Failed",
-                      "Skipped",
-                      "TimedOut"
-                    ]
-                  }
-                },
-                "Stringify_JSON": {
-                  "type": "SetVariable",
-                  "inputs": {
-                    "name": "AccountJSON",
-                    "value": "'@{concat('{',string(outputs('Compose_JSON')),'}')}'"
-                  },
-                  "runAfter": {
-                    "Compose_JSON": [
-                      "Succeeded",
-                      "Failed",
-                      "Skipped",
-                      "TimedOut"
-                    ]
-                  }
-                },
-                "Validate_messaging_queue_service_status": {
-                  "type": "If",
-                  "expression": {
-                    "and": [
-                      {
-                        "equals": [
-                          "@outputs('Invoke_Messaging_Queue_API')['statusCode']",
-                          200
-                        ]
-                      },
-                      {
-                        "equals": [
-                          "@body('Invoke_Messaging_Queue_API')?['statusCode']",
-                          "@string(200)"
-                        ]
-                      }
-                    ]
-                  },
-                  "actions": {
-                    "Set_Success_Status": {
-                      "type": "SetVariable",
-                      "inputs": {
-                        "name": "MessagingQueueStatus",
-                        "value": "Successful"
-                      },
-                      "runAfter": {}
-                    }
-                  },
-                  "runAfter": {
-                    "Invoke_Messaging_Queue_API": [
-                      "Succeeded",
-                      "Failed",
-                      "Skipped",
-                      "TimedOut"
-                    ]
-                  },
-                  "else": {
-                    "actions": {
-                      "Set_Error_Status": {
-                        "type": "SetVariable",
-                        "inputs": {
-                          "name": "MessagingQueueStatus",
-                          "value": "Failed"
-                        },
-                        "runAfter": {}
-                      }
-                    }
-                  }
-                }
-              },
-              "runAfter": {
-                "Declare_TTL_for_cosmos_logging": [
-                  "Succeeded",
-                  "Failed",
-                  "Skipped",
-                  "TimedOut"
-                ]
-              },
-              "else": {
-                "actions": {
-                  "Insert_Error_Log_JSON": {
-                    "runAfter": {
-                      "Set_Error_Log_JSON": [
-                        "Succeeded"
-                      ]
-                    },
-                    "type": "ApiConnection",
-                    "inputs": {
-                      "body": "@variables('AccountJSON')",
-                      "headers": {
-                        "x-ms-documentdb-is-upsert": false,
-                        "x-ms-documentdb-raw-partitionkey": "\"@{formatDateTime(utcNow(),'yyyyMM')}\""
-                      },
-                      "host": {
-                        "connection": {
-                          "name": "@parameters('$connections')['documentdb']['connectionId']"
-                        }
-                      },
-                      "method": "post",
-                      "path": "/dbs/@{encodeURIComponent('SfdcSync')}/colls/@{encodeURIComponent(parameters('$Collections')['Cosmosdb_Collection'])}/docs"
-                    }
-                  },
-                  "Set_Error_Log_JSON": {
-                    "type": "SetVariable",
-                    "inputs": {
-                      "name": "AccountJSON",
-                      "value": "{\n\"id\":\"@{guid()}\",\n\"partition\":\"@{formatDateTime(utcNow(),'yyyyMM')}\",\n\"logTimeUTC\":\"@{utcNow()}\",\n\"type\":\"InBound\",\n\"principal\":\"LogicApp\",\n\"operation\":\"@{parameters('$Collections')['LAname']}\",\n\"currentState\":\"@{variables('MessagingQueueStatus')}\",\n\"correlationId\":\"False Operation\",\n\"timeZone\":\"EST\",\n\"request\":\n{\"Account\":@{triggerBody()},\"User\":@{body('Retrieve_DomainUserName_From_Id')}},\n\"response\":\"\",\n\"error\":\"\",\n\"ttl\":@{variables('TTL')}\n}"
-                    },
-                    "runAfter": {}
-                  }
-                }
-              }
-            }
-          },
-          "parameters": {
-            "$connections": {
-              "defaultValue": {},
-              "type": "Object"
-            },
-            "$Collections": {
-              "type": "Object",
-              "defaultValue": {}
-            }
-          },
-          "triggers": {
-            "Poll_SFDC_to_get_updated_records": {
-              "recurrence": {
-                "frequency": "Minute",
-                "interval": 3
-              },
-              "splitOn": "@triggerBody()?['value']",
-              "type": "ApiConnection",
-              "inputs": {
-                "host": {
-                  "connection": {
-                    "name": "@parameters('$connections')['salesforce']['connectionId']"
-                  }
-                },
-                "method": "get",
-                "path": "/datasets/default/tables/@{encodeURIComponent(encodeURIComponent('Account'))}/onupdateditems",
-                "queries": {
-                  "$filter": "Is_User_Modified__c eq true"
-                }
-              }
-            }
-          },
-          "contentVersion": "1.0.0.0",
-          "outputs": {}
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "documentdb_accessKey": {
+            "type": "string",
+            "defaultValue": "id"
         },
-        "parameters": {
-          "$connections": {
-            "value": {
-              "salesforce": {
-                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'salesforce')]",
-                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('salesforce_Connection_Name'))]",
-                "connectionName": "[parameters('salesforce_Connection_Name')]"
-              },
-              "documentdb": {
-                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'documentdb')]",
-                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('documentdb_Connection_Name'))]",
-                "connectionName": "[parameters('documentdb_Connection_Name')]"
-              }
-            }
-          },
-          "$Collections": {
-            "value": {
-              "Cosmosdb_Collection": "[parameters('cosmosdb_Collection')]",
-              "LAname": "[parameters('ParamCollection')['PostAccountProfile']]"
-            }
-          }
-        }
-      },
-      "name": "[parameters('ParamCollection')['PostAccountProfile']]",
-      "type": "Microsoft.Logic/workflows",
-      "location": "[parameters('LogicAppLocation')]",
-      "tags": {
-        "displayName": "LogicApp"
-      },
-      "apiVersion": "2016-06-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/connections', parameters('salesforce_Connection_Name'))]",
-        "[resourceId('Microsoft.Web/connections', parameters('documentdb_Connection_Name'))]"
-      ]
-    },
-    {
-      "type": "MICROSOFT.WEB/CONNECTIONS",
-      "apiVersion": "2018-07-01-preview",
-      "name": "[parameters('salesforce_Connection_Name')]",
-      "location": "eastus",
-      "properties": {
-        "api": {
-          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'salesforce')]"
+        "messagingQueueAPI": {
+            "type": "string",
+            "defaultValue": "id"
         },
-        "displayName": "[parameters('salesforce_Connection_DisplayName')]",
-        "nonSecretParameterValues": {
-          "token:LoginUri": "[parameters('salesforce_token:LoginUri')]",
-          "salesforceApiVersion": "[parameters('salesforce_salesforceApiVersion')]"
-        }
-      }
-    },
-    {
-      "type": "MICROSOFT.WEB/CONNECTIONS",
-      "apiVersion": "2018-07-01-preview",
-      "name": "[parameters('documentdb_Connection_Name')]",
-      "location": "eastus",
-      "properties": {
-        "api": {
-          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'documentdb')]"
+        "messagingQueueClientId": {
+            "type": "string",
+            "defaultValue": "id"
         },
-        "displayName": "[parameters('documentdb_Connection_DisplayName')]",
-        "parameterValues": {
-          "databaseAccount": "[parameters('documentdb_databaseAccount')]",
-          "accessKey": "[parameters('documentdb_accessKey')]"
+        "messagingQueueSecret": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "documentdb_Connection_Name": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "documentdb_Connection_DisplayName": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "documentdb_databaseAccount": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "salesforce_Connection_Name": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "salesforce_Connection_DisplayName": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "cosmosdb_Collection": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "salesforce_token:LoginUri": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "salesforce_salesforceApiVersion": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "env": {
+            "type": "string",
+            "defaultValue": "id"
+        },
+        "LogicAppLocation": {
+            "type": "string",
+            "minLength": 1,
+            "allowedValues": [
+                "[resourceGroup().location]",
+                "eastasia",
+                "southeastasia",
+                "centralus",
+                "eastus",
+                "eastus2",
+                "westus",
+                "northcentralus",
+                "southcentralus",
+                "northeurope",
+                "westeurope",
+                "japanwest",
+                "japaneast",
+                "brazilsouth",
+                "australiaeast",
+                "australiasoutheast",
+                "southindia",
+                "centralindia",
+                "westindia",
+                "canadacentral",
+                "canadaeast",
+                "uksouth",
+                "ukwest",
+                "westcentralus",
+                "westus2",
+                "koreacentral",
+                "koreasouth",
+                "francecentral",
+                "francesouth",
+                "southafricanorth",
+                "southafricawest"
+            ],
+            "defaultValue": "eastus"
+        },
+        "ParamCollection": {
+            "defaultValue": {
+                "PostAccountProfile": "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM"
+            },
+            "type": "object"
         }
-      }
-    }
-  ],
-  "outputs": {}
+    },
+    "variables": {},
+    "resources": [
+        {
+            "properties": {
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "actions": {},
+                    "outputs": {},
+                    "parameters": {},
+                    "triggers": {}
+                },
+                "parameters": {}
+            },
+            "name": "[parameters('ParamCollection')['PostAccountProfile']]",
+            "type": "Microsoft.Logic/workflows",
+            "location": "[parameters('LogicAppLocation')]",
+            "tags": {
+                "displayName": "LogicApp"
+            },
+            "apiVersion": "2016-06-01",
+            "dependsOn": []
+        }
+    ],
+    "outputs": {}
 }
