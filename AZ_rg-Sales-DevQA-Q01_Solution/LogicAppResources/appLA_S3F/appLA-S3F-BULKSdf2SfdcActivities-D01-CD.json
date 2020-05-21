@@ -5,7 +5,7 @@
         "webmobile": {
             "defaultValue": {
                 "LogicApps": {
-                    "name": "logicAppName"
+                    "name": "appLA-S3F-BULKSdf2SfdcActivities-D01-CD"
                 }
             },
             "type": "object"

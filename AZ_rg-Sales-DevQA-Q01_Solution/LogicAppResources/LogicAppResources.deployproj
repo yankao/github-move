@@ -23,17 +23,17 @@
   <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
   <!-- vertag<:>end -->
   <ItemGroup>
-    <None Include="appLA_S3F\appLA-S3F-REALSfdc2SdfDeleteAccountContact-ARM.json" />
-    <None Include="appLA_S3F\appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json" />
+    <None Include="appLA_S3F\appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json" />
+    <None Include="appLA_S3F\appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD.json" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
     <Content Include="LogicApp.json" />
     <Content Include="LogicApp.parameters.json" />
-    <None Include="LogicApp_deploy.ps1" />
-    <None Include="Pipelines\azure-pipelines.yml" />
-    <None Include="Pipelines\template.yml" />
+    <None Include="PS1\appLA-S3F-BULKSdf2SfdcActivities-D01-CD_deploy.ps1" />
+    <None Include="Pipelines\logicapps-pipelines.yml" />
+    <None Include="Pipelines\deploy-template-01.yml" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
