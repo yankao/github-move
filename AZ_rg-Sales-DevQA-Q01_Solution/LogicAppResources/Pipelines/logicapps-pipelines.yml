@@ -2,7 +2,7 @@ trigger: none
 
 pr: none
 
-jobs:
+steps:
   - template : deploy-template-01.yml
     parameters:
       param:
