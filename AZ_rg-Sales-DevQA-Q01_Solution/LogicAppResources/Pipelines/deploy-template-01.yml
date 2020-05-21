@@ -7,7 +7,7 @@ steps:
       displayName: 'Azure Deployment:Create Or Update Resource Group action on rg-Sales-DevQA-Q01'
       inputs:
         azureSubscription: 'SC_d3rg1'
-        resourceGroupName: 'rg-Sales-DevQA-Q01'
+        resourceGroupName: 'd3rg1'
         location: 'East US'
         csmFile: 'AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/appLA_S3F/${{ p }}'
 
