@@ -10,8 +10,6 @@ stages:
     - template: ../Templates/deploy-arm-template-01.yml
       parameters:
         param:
-        - "appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json"
-        - "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD.json"
         #- "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json"   
         #- "appLA_S3F_REALSfdc2SdfTempAssignments_Q01"
         #- "appLA_S3F_REALSfdc2SdfTempAssignments_D01"
@@ -57,6 +55,7 @@ stages:
         #- "appLA_S3F_REALSfdc2SdfPostAccountContact_ARM_Q01"
         #- "appLA_S3F_REALSfdc2SdfPostAccountContact_ARM_D01"
         #- "appLA_S3F_REALSfdc2SdfEventHubRouter_D01"
+        - "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD.json"
         #- "appLA_S3F_REALSfdc2SdfDeleteAccountContact_Q01"
         #- "appLA_S3F_REALSfdc2SdfDeleteAccountContact_D01"
         #- "appLA_S3F_REALSfdc2SdfDeleteAccountContact_ARM_Q01"
@@ -75,3 +74,4 @@ stages:
         #- "appLA_S3F_BULKSdf2SfdcActivities_D01"
         #- "appLA_S3F_BULKSdf2SfdcActivities_D01_Backup"
         #- "appLA_S3F_BULKSdf2SfdcActivities_D01_BACKUP_LoopedSFDC"
+        - "appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json"
