@@ -2,7 +2,8 @@ parameters:
   param: []
 
 jobs:
-- steps:
+- job:
+  steps:
   - ${{ each p in parameters.param }}:
     - task: AzureResourceGroupDeployment@2
       displayName: 'Azure Deployment:Create Or Update Resource Group action on rg-Sales-DevQA-Q01'
