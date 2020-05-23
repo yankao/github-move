@@ -3,9 +3,9 @@ trigger: none
 pr: none
 
 stages:
-- stage: ~
+- stage: 
   jobs:
-  - job: ~
+  - job: 
     steps:
     - template: ../Templates/deploy-arm-template-01.yml
       parameters:
