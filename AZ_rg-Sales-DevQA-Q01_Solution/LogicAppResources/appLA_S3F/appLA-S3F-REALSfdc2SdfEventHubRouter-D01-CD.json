@@ -6,7 +6,14 @@
             "defaultValue": {
                 "LogicApps": {
                     "name": "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD",
-                    "logicAppState": "Disabled"
+                    "logicAppState": "Disabled",
+                    "tagValues": {
+                        "costcenter": "60726",
+                        "owner": "Kevin Hazzard",
+                        "dept": "Sales",
+                        "project": "New AGDC",
+                        "env": "DEV"
+                    }
                 }
             },
             "type": "object"
@@ -36,11 +43,11 @@
             "type": "Microsoft.Logic/workflows",
             "location": "[parameters('LogicAppLocation')]",
             "tags": {
-                "costcenter": "60726",
-                "owner": "Kevin Hazzard",
-                "dept": "Sales",
-                "project": "New AGDC",
-                "env": "DEV",
+                "costcenter": "[parameters('webmobile').LogicApps.tagValues.costcenter]",
+                "owner": "[parameters('webmobile').LogicApps.tagValues.owner]",
+                "dept": "[parameters('webmobile').LogicApps.tagValues.dept]",
+                "project": "[parameters('webmobile').LogicApps.tagValues.project]",
+                "env": "[parameters('webmobile').LogicApps.tagValues.env]",
                 "displayName": "LogicApp"
             },
             "dependsOn": []
