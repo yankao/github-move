@@ -6,7 +6,8 @@ stages:
 - stage:
   jobs:
   - job:
-    - template : ../Jobs/deploy-arm-template-01.yml
+    steps:
+    - template: ../Jobs/deploy-arm-template-01.yml
       parameters:
         param:
         - "appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json"
