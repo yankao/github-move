@@ -11,4 +11,3 @@ jobs:
         resourceGroupName: 'rg-Sales-DevQA-Q01'
         location: 'East US'
         csmFile: 'AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/appLA_S3F/${{ p }}'
-
