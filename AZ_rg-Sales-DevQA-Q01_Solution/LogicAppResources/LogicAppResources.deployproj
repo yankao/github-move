@@ -33,7 +33,7 @@
     <Content Include="LogicApp.parameters.json" />
     <None Include="PS1\appLA-S3F-BULKSdf2SfdcActivities-D01-CD_deploy.ps1" />
     <None Include="Pipelines\logicapps-pipelines.yml" />
-    <None Include="Jobs\deploy-arm-template-01.yml" />
+    <None Include="Templates\deploy-arm-template-01.yml" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
