@@ -2,10 +2,10 @@ trigger: none
 
 pr: none
 
-steps:
-  - template : deploy-arm-template-01.yml
-    parameters:
-      param:
-        - "appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json"
-        - "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD.json"
-        #- "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json"      
+jobs:
+- template : ../Jobs/deploy-arm-template-01.yml
+  parameters:
+    param:
+    - "appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json"
+    - "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD.json"
+    #- "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json"      
