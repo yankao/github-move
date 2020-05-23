@@ -1,7 +1,10 @@
 trigger:
+  branches:
+    include:
+    - LogicAppDev
   paths:
     include:
-    - logicapps-pipelines.yml
+    - ./logicapps-pipelines.yml
 pr: none
 
 stages:
