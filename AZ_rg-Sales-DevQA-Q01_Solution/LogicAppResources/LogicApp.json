@@ -5,7 +5,15 @@
         "webmobile": {
             "defaultValue": {
                 "LogicApps": {
-                    "name": "logicAppName"
+                    "name": "logicAppName",
+                    "logicAppState": "Disabled",
+                    "tagValues": {
+                        "costcenter": "60726",
+                        "owner": "Kevin Hazzard",
+                        "dept": "Sales",
+                        "project": "New AGDC",
+                        "env": "DEV"
+                    }
                 }
             },
             "type": "object"
@@ -34,11 +42,11 @@
             "type": "Microsoft.Logic/workflows",
             "location": "[parameters('LogicAppLocation')]",
             "tags": {
-                "costcenter": "60726",
-                "owner": "Kevin Hazzard",
-                "dept": "Sales",
-                "project": "New AGDC",
-                "env": "DEV",
+                "costcenter": "[parameters('webmobile').LogicApps.tagValues.costcenter]",
+                "owner": "[parameters('webmobile').LogicApps.tagValues.owner]",
+                "dept": "[parameters('webmobile').LogicApps.tagValues.dept]",
+                "project": "[parameters('webmobile').LogicApps.tagValues.project]",
+                "env": "[parameters('webmobile').LogicApps.tagValues.env]",
                 "displayName": "LogicApp"
             },
             "dependsOn": []
