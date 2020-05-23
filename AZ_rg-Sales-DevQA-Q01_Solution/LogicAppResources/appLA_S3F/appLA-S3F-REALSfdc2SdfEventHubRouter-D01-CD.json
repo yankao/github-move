@@ -5,7 +5,8 @@
         "webmobile": {
             "defaultValue": {
                 "LogicApps": {
-                    "name": "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD"
+                    "name": "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD",
+                    "logicAppState": "Disabled"
                 }
             },
             "type": "object"
@@ -27,7 +28,8 @@
                     "parameters": {},
                     "triggers": {}
                 },
-                "parameters": {}
+                "parameters": {},
+                "state": "[parameters('webmobile').LogicApps.logicAppState]"
             },
             "apiVersion": "2016-06-01",
             "name": "[parameters('webmobile').LogicApps.name]",

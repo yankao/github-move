@@ -31,6 +31,7 @@
     <Content Include="Deploy-AzureResourceGroup.ps1" />
     <Content Include="LogicApp.json" />
     <Content Include="LogicApp.parameters.json" />
+    <None Include="PS1\appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD_deploy .ps1" />
     <None Include="PS1\appLA-S3F-BULKSdf2SfdcActivities-D01-CD_deploy.ps1" />
     <None Include="Pipelines\logicapps-pipelines.yml" />
     <None Include="Templates\deploy-arm-template-01.yml" />
