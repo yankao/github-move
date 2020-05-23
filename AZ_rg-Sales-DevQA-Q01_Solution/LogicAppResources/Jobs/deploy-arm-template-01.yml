@@ -1,14 +1,16 @@
 parameters:
   param: []
 
-jobs:
-- job:
-  steps:
-  - ${{ each p in parameters.param }}:
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Azure Deployment:Create Or Update Resource Group action on rg-Sales-DevQA-Q01'
-      inputs:
-        azureSubscription: 'SC_rg-Sales-DevQA-Q01'
-        resourceGroupName: 'rg-Sales-DevQA-Q01'
-        location: 'East US'
-        csmFile: 'AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/appLA_S3F/${{ p }}'
+stages:
+- stage:
+  jobs:
+  - job:
+    steps:
+    - ${{ each p in parameters.param }}:
+      - task: AzureResourceGroupDeployment@2
+        displayName: 'Azure Deployment:Create Or Update Resource Group action on rg-Sales-DevQA-Q01'
+        inputs:
+          azureSubscription: 'SC_rg-Sales-DevQA-Q01'
+          resourceGroupName: 'rg-Sales-DevQA-Q01'
+          location: 'East US'
+          csmFile: 'AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/appLA_S3F/${{ p }}'
