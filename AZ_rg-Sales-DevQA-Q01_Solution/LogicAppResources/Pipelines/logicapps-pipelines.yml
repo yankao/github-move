@@ -1,0 +1,83 @@
+trigger:
+  branches:
+    include:
+    - LogicAppDev
+  paths:
+    include:
+    - ./logicapps-pipelines.yml
+
+pr: none
+
+stages:
+- stage: 
+  jobs:
+  - job: 
+    steps:
+    - template: ../Templates/deploy-arm-template-01.yml
+      parameters:
+        param:
+        #- "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json"   
+        #- "appLA_S3F_REALSfdc2SdfTempAssignments_Q01"
+        #- "appLA_S3F_REALSfdc2SdfTempAssignments_D01"
+        #- "appLA_S3F_REALSfdc2SdfTempAssignment_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostSupplierData_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostSupplierData_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostSupplierData_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostPricingRecord_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostPricingRecord_Batch_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostPricingData_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostPricingData_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostPricingData_Bkp_D01"
+        #- "appLA_S3F_RealSfdc2SdfPostPricingData_Batch_Q01"
+        #- "appLA_S3F_RealSfdc2SdfPostPricingData_Batch_D01"
+        #- "appLA_S3F_RealSfdc2SdfPostPricingData_Batch_ARM"
+        #- "appLA_S3F_REALSfdc2SdfPostPricingData_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostPricingData_ARM_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostPhoneCallData_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostPhoneCallData_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostPhoneCallData_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostNonPerformanceData_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostNonPerformanceData_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostNonPerformanceData_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostClosedAccounts_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostClosedAccounts_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostClosedAccounts_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostCallData_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostCallData_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostCallData_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostActivityResponse_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostActivityResponse_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostActivityResponse_Batch_S01_backup"
+        #- "appLA_S3F_REALSfdc2SdfPostActivityResponse_Batch_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostActivityResponse_Batch_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostActivityResponse_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostActivityResponse_ARM_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountProfile_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountProfile_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountProfile_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountProfile_ARM_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountContact_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountContact_D01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountContact_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfPostAccountContact_ARM_D01"
+        #- "appLA_S3F_REALSfdc2SdfEventHubRouter_D01"
+        - "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD.json"
+        #- "appLA_S3F_REALSfdc2SdfDeleteAccountContact_Q01"
+        #- "appLA_S3F_REALSfdc2SdfDeleteAccountContact_D01"
+        #- "appLA_S3F_REALSfdc2SdfDeleteAccountContact_ARM_Q01"
+        #- "appLA_S3F_REALSfdc2SdfDeleteAccountContact_ARM_D01"
+        #- "appLA_S3F_BULKSdf2SfdcRetailMasterIndependent_T01"
+        #- "appLA_S3F_BULKSdf2SfdcRetailMasterIndependent_Q01"
+        #- "appLA_S3F_BULKSdf2SfdcRetailMasterIndependent_D01"
+        #- "appLA_S3F_BULKSdf2SfdcRetailMasterChain_Q01"
+        #- "appLA_S3F_BULKSdf2SfdcRetailMasterChain_D01"
+        #- "appLA_S3F_BULKSdf2SfdcContacts_Q01"
+        #- "appLA_S3F_BULKSdf2SfdcContacts_D01"
+        #- "appLA_S3F_BULKSdf2SfdcActivitiesWorkOrderOnly_D01"
+        #- "appLA_S3F_BULKSdf2SfdcActivities_Test_D01"
+        #- "appLA_S3F_BULKSdf2SfdcActivities_Q01"
+        #- "appLA_S3F_BULKSdf2SfdcActivities_D01_TEST_NoLoopAPIs"
+        #- "appLA_S3F_BULKSdf2SfdcActivities_D01"
+        #- "appLA_S3F_BULKSdf2SfdcActivities_D01_Backup"
+        #- "appLA_S3F_BULKSdf2SfdcActivities_D01_BACKUP_LoopedSFDC"
+        - "appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json"
