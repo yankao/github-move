@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
     - AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/Pipelines/logicapps-pipelines.yml
+
 pr: none
 
 stages:
