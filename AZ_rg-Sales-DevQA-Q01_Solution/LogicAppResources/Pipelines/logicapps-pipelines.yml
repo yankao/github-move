@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-    - LogicAppDev
+    - master
   paths:
     include:
-    - ./logicapps-pipelines.yml
+    - AZ_rg-Sales-DevQA-Q01_Solution/LogicAppResources/Pipelines/logicapps-pipelines.yml
 pr: none
 
 stages:
