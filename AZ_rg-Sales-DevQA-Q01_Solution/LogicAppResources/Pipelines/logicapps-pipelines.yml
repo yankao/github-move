@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
     - ./logicapps-pipelines.yml
+
 pr: none
 
 stages:
