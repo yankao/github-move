@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "LogicAppResources", "LogicAppResources\LogicAppResources.deployproj", "{3FD09D96-14CE-43EA-9029-9983B1126527}"
 EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "VMSqlResources", "VMSqlResources\VMSqlResources.deployproj", "{55632FC5-8F2C-4658-8752-48B989CE6462}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3FD09D96-14CE-43EA-9029-9983B1126527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD09D96-14CE-43EA-9029-9983B1126527}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD09D96-14CE-43EA-9029-9983B1126527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55632FC5-8F2C-4658-8752-48B989CE6462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55632FC5-8F2C-4658-8752-48B989CE6462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55632FC5-8F2C-4658-8752-48B989CE6462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55632FC5-8F2C-4658-8752-48B989CE6462}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

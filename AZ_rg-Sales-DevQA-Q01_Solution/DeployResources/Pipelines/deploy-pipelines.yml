@@ -13,7 +13,7 @@ stages:
   jobs:
   - job: 
     steps:
-    - template: ../PipelineTemplates/deploy-arm-template-01.yml
+    - template: ../Templates/deploy-arm-template-01.yml
       parameters:
         param:
         #- "appLA-S3F-REALSfdc2SdfPostAccountProfile-ARM.json"   

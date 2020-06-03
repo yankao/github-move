@@ -1,0 +1,369 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "tagvalues": {
+            "value": {
+                "Azure": {
+                    "BA": "SALES",
+                    "Landscape": "QA",
+                    "Solution": "Azure Platform (CI3715871)",
+                    "OpCo": "CAP",
+                    "costcenter": 60726
+                },
+                "RG": "rg-Sales-DevQA-Q01",
+                "Template": "CAPAZISQLC01.parameters.json"
+            }
+        },
+        "compute": {
+            "value": {
+                "AppService": [
+                    {
+
+                    }
+                ],
+                "Functions": [
+                    {
+
+                    }
+                ],
+                "AvSets": [
+                    {
+
+                    }
+                ],
+                "VirtualMachines": {
+                    "osProfile": {
+                        "computerName": "CAPAZISQLC01",
+                        "adminUsername": "capadmin",
+                        "adminPassword": "rootAzure11!!",
+                        "windowsConfiguration": {
+                            "provisionVMAgent": true,
+                            "enableAutomaticUpdates": true,
+                            "timeZone": "Eastern Standard Time"
+                        },
+                        "secrets": []
+                    },
+                    "hardwareProfile": {
+                        "vmSize": "Standard_E4s_v3"
+                    },
+                    "storageProfile": {
+                        "imageReference": {
+                            "publisher": "MicrosoftWindowsServer",
+                            "offer": "WindowsServer",
+                            "sku": "2019-Datacenter",
+                            "version": "latest"
+                        },
+                        "osDisk": {
+                            "createOption": "fromImage",
+                            "name": "CAPAZISQLC01-osdisk",
+                            "managedDisk": {
+                                "storageAccountType": "Premium_LRS"
+                            }
+                        },
+                        "datadisks": [
+                            {
+                                "name": "CAPAZISQLC01-datadisk01",
+                                "lun": 0,
+                                "createOption": "Empty",
+                                "diskSizeGB": 128,
+                                "managedDisk": {
+                                    "storageAccountType": "Premium_LRS"
+                                }
+                            },
+                            {
+                                "name": "CAPAZISQLC01-datadisk02",
+                                "lun": 1,
+                                "createOption": "Empty",
+                                "diskSizeGB": 128,
+                                "managedDisk": {
+                                    "storageAccountType": "Premium_LRS"
+                                }
+                            },
+                            {
+                                "name": "CAPAZISQLC01-datadisk03",
+                                "lun": 2,
+                                "createOption": "Empty",
+                                "diskSizeGB": 128,
+                                "managedDisk": {
+                                    "storageAccountType": "Premium_LRS"
+                                }
+                            },
+                            {
+                                "name": "CAPAZISQLC01-datadisk04",
+                                "lun": 3,
+                                "createOption": "Empty",
+                                "diskSizeGB": 256,
+                                "managedDisk": {
+                                    "storageAccountType": "Premium_LRS"
+                                }
+                            },
+                            {
+                                "name": "CAPAZISQLC01-datadisk05",
+                                "lun": 4,
+                                "createOption": "Empty",
+                                "diskSizeGB": 1024,
+                                "managedDisk": {
+                                    "storageAccountType": "Premium_LRS"
+                                }
+                            }
+                        ]
+                    },
+                    "adapters": [
+                        {
+                            "primary": true,
+                            "ipconfigs": [
+                                {
+                                    "name": "ipconfig1",
+                                    "resourceGroup": "d3rg2",
+                                    "virtualNetwork": "d3rg2-vnet",
+                                    "subnet": "default",
+                                    "primary": true,
+                                    "pipAddress": "10.0.0.6",
+                                    "privateIPAddressVersion": "IPv4"
+                                }
+                            ],
+                            "enableAcceleratedNetworking": true,
+                            "enableIPForwarding": false
+                        }
+                    ],
+                    "domain": {
+                        "settings": {
+                            "Name": "pmusa.net",
+                            "User": "pmusa\\s-AzureServerSVC",
+                            "Restart": "true",
+                            "Options": 3,
+                            "OUPath": "OU=Azure,OU=Servers,OU=ALCS,DC=pmusa,DC=net"
+                        }
+                    },
+                    "custom": {
+                        "settings": {
+                            "fileUris": [
+                                "https://datacapstoragep01.blob.core.windows.net/customscripts/CAPAZISQLC01-1.ps1"
+                            ],
+                            "timestamp": 123456789
+                        },
+                        "protectedSettings": {
+                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File CAPAZISQLC01-1.ps1"
+                        }
+                    }
+                }
+            }
+        },
+        "networking": {
+            "value": {
+                "vnetName": null,
+                "prefix": null,
+                "subnets": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "ai": {
+            "value": {
+            }
+        },
+        "containers": {
+            "value": {
+                "AzureContainerInstances": [
+                    {
+
+                    }
+                ],
+                "AzureContainerRegistry": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "analytics": {
+            "value": {
+                "AnalysisServices": [
+                    {
+
+                    }
+                ],
+                "DataCatalog": [
+                    {
+
+                    }
+                ],
+                "DataLakeAnalytics": [
+                    {
+
+                    }
+                ],
+                "HDInsight": [
+                    {
+
+                    }
+                ],
+                "MachineLearning": [
+                    {
+
+                    }
+                ],
+                "PowerBIEmbedded": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "databases": {
+            "value": {
+                "CosmosDB": [
+                    {
+
+                    }
+                ],
+                "MySQL": [
+                    {
+
+                    }
+                ],
+                "PostgreSQL": [
+                    {
+
+                    }
+                ],
+                "RedisCache": [
+                    {
+
+                    }
+                ],
+                "SQLDataWarehouse": [
+                    {
+
+                    }
+                ],
+                "SQLDatabase": [
+                    {
+
+                    }
+                ],
+                "SQLServer": [
+                    {
+
+                    }
+                ],
+                "SQLServerStretchDatabase": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "developer": {
+            "value": {
+                "VisualStudioTeamServices": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "enterprise": {
+            "value": {
+                "DataFactory": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "iot": {
+            "value": {
+                "EventHubs": [
+                    {
+
+                    }
+                ],
+                "NotificationHubs": [
+                    {
+
+                    }
+                ],
+                "StreamAnalytics": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "monitoring": {
+            "value": {
+            }
+        },
+        "security": {
+            "value": {
+                "KeyVault": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "storage": {
+            "value": {
+                "DataLakeStore": [
+                    {
+
+                    }
+                ],
+                "Storage": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "webmobile": {
+            "value": {
+                "APIApps": [
+                    {
+
+                    }
+                ],
+                "LogicApps": [
+                    {
+
+                    }
+                ],
+                "Search": [
+                    {
+
+                    }
+                ],
+                "WebApps": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "other": {
+            "value": {
+            }
+        },
+        "vmPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/96a7ac3f-bb4c-431c-a48f-ace82f27853b/resourceGroups/rg-Sales-DevQA-Q01/providers/Microsoft.KeyVault/vaults/secKV-CAP-01-P01"
+                },
+                "secretName": "pw-CAPAZISQLC01"
+            }
+        },
+        "adPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/96a7ac3f-bb4c-431c-a48f-ace82f27853b/resourceGroups/rg-Sales-DevQA-Q01/providers/Microsoft.KeyVault/vaults/secKV-CAP-01-P01"
+                },
+                "secretName": "pw-domain"
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "tagvalues": {
+            "type": "object"
+        },
+        "compute": {
+            "type": "object"
+        },
+        "networking": {
+            "type": "object"
+        },
+        "ai": {
+            "type": "object"
+        },
+        "containers": {
+            "type": "object"
+        },
+        "analytics": {
+            "type": "object"
+        },
+        "databases": {
+            "type": "object"
+        },
+        "developer": {
+            "type": "object"
+        },
+        "enterprise": {
+            "type": "object"
+        },
+        "iot": {
+            "type": "object"
+        },
+        "monitoring": {
+            "type": "object"
+        },
+        "security": {
+            "type": "object"
+        },
+        "storage": {
+            "type": "object"
+        },
+        "webmobile": {
+            "type": "object"
+        },
+        "other": {
+            "type": "object"
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "apiVersion": "[providers('Microsoft.KeyVault','vaults').apiVersions[0]]",
+            "name": "[parameters('security').keyVaults.name]",
+            "type": "Microsoft.KeyVault/vaults",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('tagvalues').Azure]",
+            "properties": {
+                "tenantId": "[parameters('security').keyVaults.tenantId]",
+                "enabledForDeployment": "[parameters('security').keyVaults.enabledForDeployment]",
+                "enabledForTemplateDeployment": "[parameters('security').keyVaults.enabledForTemplateDeployment]",
+                "enabledForVolumeEncryption": "[parameters('security').keyVaults.enabledForVolumeEncryption]",
+                "enableSoftDelete": "[parameters('security').keyVaults.enableSoftDelete]",
+                "accessPolicies": "[parameters('security').keyVaults.accessPolicies]",
+                "sku": {
+                    "name": "[parameters('security').keyVaults.skuName]",
+                    "family": "A"
+                }
+            }
+        }
+    ]
+}

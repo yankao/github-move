@@ -1,0 +1,25 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - AZ_rg-Sales-DevQA-Q01_Solution/VMSqlResources/Pipelines/deploy-pipelines.yml
+
+pr: none
+
+stages:
+- stage: 
+  jobs:
+  - job: 
+    steps:
+    - template: ../PipelineTemplates/deploy-arm-template-02.yml
+      parameters:
+        templatefilename: "CAPAZISQLC01.parameters.json"
+        parameterfilename: "virtual_machine_NICs.v2.3.deploy.json"
+  - job: 
+    steps:
+    - template: ../PipelineTemplates/deploy-arm-template-02.yml
+      parameters:
+        templatefilename: "CAPAZISQLC01.parameters.json"
+        parameterfilename: "virtual_machine.v2.2.deploy.json"

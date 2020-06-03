@@ -1,0 +1,244 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "tagvalues": {
+            "value": {
+                "Azure": {
+                    "BA": "SALES",
+                    "Landscape": "QA",
+                    "Solution": "Azure SDF Platform (CI3715871)",
+                    "OpCo": "CAP",
+                    "costcenter": 60726
+                },
+                "RG": "rg-Sales-DevQA-Q01",
+                "Template": "secKV-CAP-01-P01.parameters.json"
+            }
+        },
+        "compute": {
+            "value": {
+                "AppService": [
+                    {
+
+                    }
+                ],
+                "Functions": [
+                    {
+
+                    }
+                ],
+                "LinuxVirtualMachines": [
+                    {
+
+                    }
+                ],
+                "WindowsVirtualMachines": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "networking": {
+            "value": {
+                "vnetName": null,
+                "prefix": null,
+                "subnets": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "ai": {
+            "value": {
+            }
+        },
+        "containers": {
+            "value": {
+                "AzureContainerInstances": [
+                    {
+
+                    }
+                ],
+                "AzureContainerRegistry": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "analytics": {
+            "value": {
+                "AnalysisServices": [
+                    {
+
+                    }
+                ],
+                "DataCatalog": [
+                    {
+
+                    }
+                ],
+                "DataLakeAnalytics": [
+                    {
+
+                    }
+                ],
+                "HDInsight": [
+                    {
+
+                    }
+                ],
+                "MachineLearning": [
+                    {
+
+                    }
+                ],
+                "PowerBIEmbedded": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "databases": {
+            "value": {
+                "CosmosDB": [
+                    {
+
+                    }
+                ],
+                "MySQL": [
+                    {
+
+                    }
+                ],
+                "PostgreSQL": [
+                    {
+
+                    }
+                ],
+                "RedisCache": [
+                    {
+
+                    }
+                ],
+                "SQLDataWarehouse": [
+                    {
+
+                    }
+                ],
+                "SQLDatabase": [
+                    {
+
+                    }
+                ],
+                "SQLServerStretchDatabase": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "developer": {
+            "value": {
+                "VisualStudioTeamServices": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "enterprise": {
+            "value": {
+                "DataFactory": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "iot": {
+            "value": {
+                "EventHubs": [
+                    {
+
+                    }
+                ],
+                "NotificationHubs": [
+                    {
+
+                    }
+                ],
+                "StreamAnalytics": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "monitoring": {
+            "value": {
+            }
+        },
+        "security": {
+            "value": {
+                "keyVaults": {
+                    "name": "secKV-CAP-01-P01",
+                    "skuName": "Standard",
+                    "tenantId": "76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61",
+                    "enabledForDeployment": true,
+                    "enabledForTemplateDeployment": true,
+                    "enabledForVolumeEncryption": false,
+                    "enableSoftDelete": true,
+                    "enablePurgeProtection": true,
+                    "accessPolicies": [
+                    ],
+                    "secrets": [
+                    ]
+                }
+            }
+        },
+        "storage": {
+            "value": {
+                "DataLakeStore": [
+                    {
+
+                    }
+                ],
+                "Storage": {
+
+                }
+            }
+        },
+        "webmobile": {
+            "value": {
+                "APIApps": [
+                    {
+
+                    }
+                ],
+                "LogicApps": [
+                    {
+
+                    }
+                ],
+                "Search": [
+                    {
+
+                    }
+                ],
+                "WebApps": [
+                    {
+
+                    }
+                ]
+            }
+        },
+        "other": {
+            "value": {
+            }
+        }
+    }
+}

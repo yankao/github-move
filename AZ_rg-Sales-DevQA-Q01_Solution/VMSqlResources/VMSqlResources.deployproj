@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>55632fc5-8f2c-4658-8752-48b989ce6462</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PrepareForBuildDependsOn>
+    </PrepareForBuildDependsOn>
+  </PropertyGroup>
+  <Import Condition=" Exists('Deployment.targets') " Project="Deployment.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- vertag<:>start tokens<:>maj.min -->
+  <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
+  <!-- vertag<:>end -->
+  <ItemGroup>
+    <Content Include="AzureDeployParameters\CAPAZISQLC01.parameters.json" />
+    <Content Include="AzureDeployParameters\datacapstoragep01.parameters.json" />
+    <Content Include="AzureDeployParameters\secKV-CAP-01-P01.parameters.json" />
+    <Content Include="AzureDeployTemplates\cleanup_rg.template.json" />
+    <Content Include="AzureDeployTemplates\key_vault.v1.0.deploy.json" />
+    <Content Include="AzureDeployTemplates\storage.v3.1.deploy.json" />
+    <Content Include="AzureDeployTemplates\virtual_machine.v2.2.deploy.json" />
+    <Content Include="AzureDeployTemplates\virtual_machine_joindomain.v2.2.deploy.json" />
+    <Content Include="AzureDeployTemplates\virtual_machine_NICs.v2.3.deploy.json" />
+    <Content Include="AzureDeployTemplates\virtual_machine_update.v2.2.deploy.json" />
+    <Content Include="AzureDeployTemplates\virtual_machine_vmaccess.v2.2.deploy.json" />
+    <Content Include="AzureDeployTemplates\virtual_machine_win_script.v2.2.deploy.json" />
+    <None Include="Deployment.targets">
+      <Visible>False</Visible>
+    </None>
+    <Content Include="Deploy-AzureResourceGroup.ps1" />
+    <None Include="KeyVaults\secKV-CAP-01-P01_deploy.ps1" />
+    <None Include="Pipelines\deploy-pipelines.yml" />
+    <None Include="PIpelineTemplates\deploy-arm-template-02.yml" />
+    <None Include="ResourceGroup\clean_up_resource_group.ps1" />
+    <None Include="ResourceGroup\resource_group_deploy.ps1" />
+    <None Include="ResourceGroup\resource_group_tag.ps1" />
+    <None Include="Storage\datacapstoragep01_deploy.ps1" />
+    <None Include="VMs\CAPAZISQLC01_deploy.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="2.0\" />
+    <Folder Include="BuildAll\" />
+  </ItemGroup>
+  <Target Name="GetReferenceAssemblyPaths" />
+</Project>
