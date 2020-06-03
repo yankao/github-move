@@ -11,7 +11,7 @@ steps:
         displayName: "Azure Deployment:Create Or Update Resource Group action on rg-Sales-DevQA-Q01"
         inputs: 
           azureSubscription: SC_rg-Sales-DevQA-Q01
-          csmFile: "AZ_rg-Sales-DevQA-Q01_Solution/VMSqlResources/AzureDeployTemplates/${{ parameterfilename }}"
+          csmFile: "AZ_rg-Sales-DevQA-Q01_Solution/VMSqlResources/AzureDeployTemplates/${{ parameter.parameterfilename }}"
           csmParametersFile: "AZ_rg-Sales-DevQA-Q01_Solution/VMSqlResources/AzureDeployParameters/${{ parameterfilename }}"
           location: "East US"
           resourceGroupName: rg-Sales-DevQA-Q01
