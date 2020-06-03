@@ -12,6 +12,6 @@ steps:
         inputs: 
           azureSubscription: SC_rg-Sales-DevQA-Q01
           csmFile: "AZ_rg-Sales-DevQA-Q01_Solution/VMSqlResources/AzureDeployTemplates/${{ parameter.parameterfilename }}"
-          csmParametersFile: "AZ_rg-Sales-DevQA-Q01_Solution/VMSqlResources/AzureDeployParameters/${{ paramrter.parameterfilename }}"
+          csmParametersFile: "AZ_rg-Sales-DevQA-Q01_Solution/VMSqlResources/AzureDeployParameters/${{ parameter.parameterfilename }}"
           location: "East US"
           resourceGroupName: rg-Sales-DevQA-Q01
