@@ -22,4 +22,4 @@ stages:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
       parameters:
         parameterfilename: "CAPAZISQLC01.parameters.json"
-        templatefilename: "virtual_machine.v2.2.deploy.json"
+        templatefilename: "virtual_machine_NICs.v2.3.deploy.json"
