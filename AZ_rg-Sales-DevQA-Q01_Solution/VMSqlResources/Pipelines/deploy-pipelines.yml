@@ -15,11 +15,11 @@ stages:
     steps:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
       parameters:
-        templatefilename: "CAPAZISQLC01.parameters.json"
-        parameterfilename: "virtual_machine_NICs.v2.3.deploy.json"
+        parameterfilename: "CAPAZISQLC01.parameters.json"
+        templatefilename: "virtual_machine_NICs.v2.3.deploy.json"
   - job: 
     steps:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
       parameters:
-        templatefilename: "CAPAZISQLC01.parameters.json"
-        parameterfilename: "virtual_machine.v2.2.deploy.json"
+        parameterfilename: "CAPAZISQLC01.parameters.json"
+        templatefilename: "virtual_machine.v2.2.deploy.json"
