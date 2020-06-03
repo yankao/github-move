@@ -1,8 +1,8 @@
 parameters: 
-  - name: templatefilename # name of the template file; required
+  - name: parameter.parameterfilename # name of the template file; required
     type: string # data type of the parameter; required
     default: ''
-  - name: parameterfilename # name of the parameter file; required
+  - name: parameter.parameterfilename # name of the parameter file; required
     type: string # data type of the parameter; required
     default: ''
 
