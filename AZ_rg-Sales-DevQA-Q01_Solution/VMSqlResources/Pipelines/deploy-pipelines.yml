@@ -11,13 +11,15 @@ pr: none
 stages:
 - stage: 
   jobs:
-  - job: 
+  - job: job_NIC
     steps:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
       parameters:
         parameterfilename: "CAPAZISQLC01.parameters.json"
         templatefilename: "virtual_machine_NICs.v2.3.deploy.json"
-  - job: 
+  - job: job_VM
+    dependsOn: job_NIC
+    condition: succeeded()
     steps:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
       parameters:
