@@ -4,7 +4,7 @@
     "parameters": {
         "logicAppName": {
             "type": "string",
-            "defaultValue": "appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD"
+            "defaultValue": "appLA-Default"
         },
         "webmobile": {
             "defaultValue": {

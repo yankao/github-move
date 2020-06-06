@@ -25,6 +25,7 @@
   <ItemGroup>
     <Content Include="appLA_S3F\appLA-S3F-BULKSdf2SfdcActivities-D01-CD.json" />
     <Content Include="appLA_S3F\appLA-S3F-REALSfdc2SdfEventHubRouter-D01-CD.json" />
+    <Content Include="appLA_S3F\LogicApp.json" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
