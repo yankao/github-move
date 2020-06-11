@@ -25,3 +25,11 @@ stages:
       parameters:
         parameterfilename: "CAPAZISQLC01.parameters.json"
         templatefilename: "virtual_machine.v2.2.deploy.json"
+  - job: job_SQL
+    dependsOn: job_SQL
+    condition: succeeded()
+    steps:
+    - template: ../PipelineTemplates/deploy-arm-template-02.yml
+      parameters:
+        parameterfilename: "CAPAZISQLC01.parameters.json"
+        templatefilename: "virtual_machine_win_script.v2.2.deploy.json"
