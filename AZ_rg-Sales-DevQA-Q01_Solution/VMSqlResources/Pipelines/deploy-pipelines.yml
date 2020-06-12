@@ -11,17 +11,30 @@ pr: none
 stages:
 - stage: 
   jobs:
-  - job: job_NIC
+  - job: job_Network
     steps:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
       parameters:
         parameterfilename: "CAPAZISQLC01.parameters.json"
         templatefilename: "virtual_machine_NICs.v2.3.deploy.json"
-  - job: job_VM
-    dependsOn: job_NIC
+  - job: job_Win_Server_2019
+    dependsOn: job_Network
     condition: succeeded()
     steps:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
       parameters:
         parameterfilename: "CAPAZISQLC01.parameters.json"
         templatefilename: "virtual_machine.v2.2.deploy.json"
+  - job: job_SQL_Server_2017
+    dependsOn: job_Win_Server_2019
+    condition: succeeded()
+    steps:
+    - template: ../PipelineTemplates/deploy-arm-template-02.yml
+      parameters:
+        parameterfilename: "CAPAZISQLC01.parameters.json"
+        templatefilename: "virtual_machine_win_script.v2.2.deploy.json"
+  - job: job_SQL_2008_DB
+    dependsOn: job_SQL_Server_2017
+    condition: succeeded()
+    steps:
+    - script: echo 'Restore adventure-works-2008r2-oltp'
