@@ -17,7 +17,7 @@ stages:
       parameters:
         parameterfilename: "CAPAZISQLC01.parameters.json"
         templatefilename: "virtual_machine_NICs.v2.3.deploy.json"
-  - job: job_Win_Server_2016
+  - job: job_Win_Server_2019
     dependsOn: job_Network
     condition: succeeded()
     steps:
@@ -26,7 +26,7 @@ stages:
         parameterfilename: "CAPAZISQLC01.parameters.json"
         templatefilename: "virtual_machine.v2.2.deploy.json"
   - job: job_SQL_Server_2017
-    dependsOn: job_Win_Server_2016
+    dependsOn: job_Win_Server_2019
     condition: succeeded()
     steps:
     - template: ../PipelineTemplates/deploy-arm-template-02.yml
