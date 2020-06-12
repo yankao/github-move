@@ -33,7 +33,7 @@ stages:
       parameters:
         parameterfilename: "CAPAZISQLC01.parameters.json"
         templatefilename: "virtual_machine_win_script.v2.2.deploy.json"
-  - job: job_SQL_2008_DB
+  - job: job_SQL_2008R2_DB
     dependsOn: job_SQL_Server_2017
     condition: succeeded()
     steps:
