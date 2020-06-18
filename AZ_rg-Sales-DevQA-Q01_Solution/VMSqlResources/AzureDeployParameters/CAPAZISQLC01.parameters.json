@@ -6,10 +6,10 @@
             "value": {
                 "Azure": {
                     "BA": "SALES",
-                    "Landscape": "QA",
-                    "Solution": "Azure Platform (CI3715871)",
+                    "Landscape": "PROD",
+                    "Solution": "Azure Platform",
                     "OpCo": "CAP",
-                    "costcenter": 60726
+                    "costcenter": 60740
                 },
                 "RG": "rg-Sales-DevQA-Q01",
                 "Template": "CAPAZISQLC01.parameters.json"

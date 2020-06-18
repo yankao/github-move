@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>1aeec328-e37c-4cce-9829-1653005742b2</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PrepareForBuildDependsOn>
+    </PrepareForBuildDependsOn>
+  </PropertyGroup>
+  <Import Condition=" Exists('Deployment.targets') " Project="Deployment.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- vertag<:>start tokens<:>maj.min -->
+  <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
+  <!-- vertag<:>end -->
+  <ItemGroup>
+    <None Include="AzureDeployParameters\datadb-cap-d01.parameters.json" />
+    <None Include="AzureDeployParameters\datasql-cap-d01.parameters.json" />
+    <None Include="AzureDeployTemplates\SQLDatabase.v1.0.deploy.json" />
+    <None Include="AzureDeployTemplates\SQLServer.v1.0.deploy.json" />
+    <None Include="Deployment.targets">
+      <Visible>False</Visible>
+    </None>
+    <None Include="ResourceGroups\resource_group_deploy.ps1" />
+    <None Include="ResourceGroups\resource_group_tag.ps1" />
+    <None Include="SQL\datadb-cap-d01_deploy.ps1" />
+    <None Include="SQL\datasql-cap-d01_deploy.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="2.0\" />
+    <Folder Include="BuildAll\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Deploy-AzureResourceGroup.ps1" />
+  </ItemGroup>
+  <Target Name="GetReferenceAssemblyPaths" />
+</Project>
