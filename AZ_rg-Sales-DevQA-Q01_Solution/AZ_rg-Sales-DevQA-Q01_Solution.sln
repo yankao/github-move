@@ -11,6 +11,8 @@ Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "ProjectLogicApp-01", "Proje
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "ASqlResources", "ASqlResources\ASqlResources.deployproj", "{1AEEC328-E37C-4CCE-9829-1653005742B2}"
 EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "VMDSCResources", "VMDSCResources\VMDSCResources.deployproj", "{EB124EBF-AAC3-4E55-8018-6044315D246F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1AEEC328-E37C-4CCE-9829-1653005742B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AEEC328-E37C-4CCE-9829-1653005742B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AEEC328-E37C-4CCE-9829-1653005742B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB124EBF-AAC3-4E55-8018-6044315D246F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB124EBF-AAC3-4E55-8018-6044315D246F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB124EBF-AAC3-4E55-8018-6044315D246F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB124EBF-AAC3-4E55-8018-6044315D246F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

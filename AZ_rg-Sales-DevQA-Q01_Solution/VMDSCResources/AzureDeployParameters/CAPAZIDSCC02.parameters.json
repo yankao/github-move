@@ -12,7 +12,7 @@
                     "costcenter": 60740
                 },
                 "RG": "rg-Sales-DevQA-Q01",
-                "Template": "CAPAZISQLC01.parameters.json"
+                "Template": "CAPAZIDSCC02.parameters.json"
             }
         },
         "compute": {
@@ -34,7 +34,7 @@
                 ],
                 "VirtualMachines": {
                     "osProfile": {
-                        "computerName": "CAPAZISQLC01",
+                        "computerName": "CAPAZIDSCC02",
                         "adminUsername": "capadmin",
                         "adminPassword": "rootAzure11!!",
                         "windowsConfiguration": {
@@ -45,7 +45,7 @@
                         "secrets": []
                     },
                     "hardwareProfile": {
-                        "vmSize": "Standard_E4s_v3"
+                        "vmSize": "Standard_D2s_v3"
                     },
                     "storageProfile": {
                         "imageReference": {
@@ -56,53 +56,17 @@
                         },
                         "osDisk": {
                             "createOption": "fromImage",
-                            "name": "CAPAZISQLC01-osdisk",
+                            "name": "CAPAZIDSCC02-osdisk",
                             "managedDisk": {
                                 "storageAccountType": "Premium_LRS"
                             }
                         },
                         "datadisks": [
                             {
-                                "name": "CAPAZISQLC01-datadisk01",
+                                "name": "CAPAZIDSCC02-datadisk01",
                                 "lun": 0,
                                 "createOption": "Empty",
                                 "diskSizeGB": 128,
-                                "managedDisk": {
-                                    "storageAccountType": "Premium_LRS"
-                                }
-                            },
-                            {
-                                "name": "CAPAZISQLC01-datadisk02",
-                                "lun": 1,
-                                "createOption": "Empty",
-                                "diskSizeGB": 128,
-                                "managedDisk": {
-                                    "storageAccountType": "Premium_LRS"
-                                }
-                            },
-                            {
-                                "name": "CAPAZISQLC01-datadisk03",
-                                "lun": 2,
-                                "createOption": "Empty",
-                                "diskSizeGB": 128,
-                                "managedDisk": {
-                                    "storageAccountType": "Premium_LRS"
-                                }
-                            },
-                            {
-                                "name": "CAPAZISQLC01-datadisk04",
-                                "lun": 3,
-                                "createOption": "Empty",
-                                "diskSizeGB": 256,
-                                "managedDisk": {
-                                    "storageAccountType": "Premium_LRS"
-                                }
-                            },
-                            {
-                                "name": "CAPAZISQLC01-datadisk05",
-                                "lun": 4,
-                                "createOption": "Empty",
-                                "diskSizeGB": 256,
                                 "managedDisk": {
                                     "storageAccountType": "Premium_LRS"
                                 }
@@ -119,7 +83,7 @@
                                     "virtualNetwork": "d3rg2-vnet",
                                     "subnet": "default",
                                     "primary": true,
-                                    "pipAddress": "10.0.0.6",
+                                    "pipAddress": "10.0.0.9",
                                     "privateIPAddressVersion": "IPv4"
                                 }
                             ],
@@ -139,12 +103,12 @@
                     "custom": {
                         "settings": {
                             "fileUris": [
-                                "https://datacapstoragep01.blob.core.windows.net/customscripts/CAPAZISQLC01-1.ps1"
+                                "https://datacapstoragep01.blob.core.windows.net/customscripts/CAPAZIDSCC02-1.ps1"
                             ],
                             "timestamp": 123456789
                         },
                         "protectedSettings": {
-                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File CAPAZISQLC01-1.ps1"
+                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File CAPAZIDSCC02-1.ps1"
                         }
                     }
                 }
@@ -354,7 +318,7 @@
                 "keyVault": {
                     "id": "/subscriptions/96a7ac3f-bb4c-431c-a48f-ace82f27853b/resourceGroups/rg-Sales-DevQA-Q01/providers/Microsoft.KeyVault/vaults/secKV-CAP-01-P01"
                 },
-                "secretName": "pw-CAPAZISQLC01"
+                "secretName": "pw-CAPAZIDSCC02"
             }
         },
         "adPassword": {
