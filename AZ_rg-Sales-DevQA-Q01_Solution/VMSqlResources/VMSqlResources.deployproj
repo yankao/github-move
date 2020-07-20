@@ -31,10 +31,10 @@
     <Content Include="AzureDeployTemplates\storage.v3.1.deploy.json" />
     <Content Include="AzureDeployTemplates\virtual_machine.v2.2.deploy.json" />
     <Content Include="AzureDeployTemplates\virtual_machine_joindomain.v2.2.deploy.json" />
-    <Content Include="AzureDeployTemplates\virtual_machine_NICs.v2.3.deploy.json" />
     <Content Include="AzureDeployTemplates\virtual_machine_update.v2.2.deploy.json" />
     <Content Include="AzureDeployTemplates\virtual_machine_vmaccess.v2.2.deploy.json" />
     <Content Include="AzureDeployTemplates\virtual_machine_win_script.v2.2.deploy.json" />
+    <None Include="AzureDeployTemplates\virtual_machine_NICs.v2.4.deploy.json" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
